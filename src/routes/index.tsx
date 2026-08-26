@@ -322,7 +322,7 @@ function ForestScene() {
 
       // click sparkles
       for (let i = burstRef.current.length - 1; i >= 0; i--) {
-        const s = burstRef.current[i];
+        const s = burstRef.current[i]!;
         s.life += 1;
         s.vy += 0.01;
         s.vx *= 0.97;
