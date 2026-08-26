@@ -305,7 +305,7 @@ function ForestScene() {
 
       // leaves
       for (let i = leaves.length - 1; i >= 0; i--) {
-        const l = leaves[i];
+        const l = leaves[i]!;
         l.swayPhase += 0.02;
         l.x += l.vx + Math.sin(l.swayPhase) * l.sway * 0.5;
         l.y += l.vy;
