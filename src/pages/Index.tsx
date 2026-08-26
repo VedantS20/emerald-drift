@@ -1,27 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useCallback } from "react";
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Stillwood — a living forest to breathe with" },
-      {
-        name: "description",
-        content:
-          "An interactive, soundless green-nature scene: drifting fireflies, falling leaves, mist and god rays. Open it and just stare.",
-      },
-      { property: "og:title", content: "Stillwood — a living forest to breathe with" },
-      {
-        property: "og:description",
-        content:
-          "An interactive, soundless green-nature scene to open and stare at. Drifting fireflies, falling leaves, mist and god rays.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: ForestScene,
-});
 
 /* ---------- particle / scene types ---------- */
 type Firefly = {
@@ -221,14 +198,7 @@ function ForestScene() {
       // soft horizon glow (follows pointer subtly)
       const glowX = w * 0.5 + parX * w * 0.12;
       const glowY = h * 0.74;
-      const glow = ctx.createRadialGradient(
-        glowX,
-        glowY,
-        0,
-        glowX,
-        glowY,
-        Math.max(w, h) * 0.6,
-      );
+      const glow = ctx.createRadialGradient(glowX, glowY, 0, glowX, glowY, Math.max(w, h) * 0.6);
       glow.addColorStop(0, "rgba(220, 240, 160, 0.20)");
       glow.addColorStop(0.4, "rgba(180, 220, 140, 0.07)");
       glow.addColorStop(1, "rgba(0,0,0,0)");
@@ -245,8 +215,7 @@ function ForestScene() {
         }
         if (s.x < -10) s.x = w + 10;
         if (s.x > w + 10) s.x = -10;
-        ctx.globalAlpha =
-          s.alpha * (0.6 + 0.4 * Math.sin(t * 0.02 + s.phase));
+        ctx.globalAlpha = s.alpha * (0.6 + 0.4 * Math.sin(t * 0.02 + s.phase));
         ctx.fillStyle = "rgba(214, 240, 196, 0.9)";
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
@@ -394,7 +363,10 @@ function ForestScene() {
       <div className="forest-godrays" aria-hidden="true">
         <div className="forest-ray" style={{ left: "12%", width: "26vw", animationDelay: "0s" }} />
         <div className="forest-ray" style={{ left: "42%", width: "18vw", animationDelay: "-6s" }} />
-        <div className="forest-ray" style={{ left: "66%", width: "30vw", animationDelay: "-12s" }} />
+        <div
+          className="forest-ray"
+          style={{ left: "66%", width: "30vw", animationDelay: "-12s" }}
+        />
       </div>
 
       {/* mist layers */}
@@ -505,17 +477,7 @@ const PinePositions = [
   { x: 1300, h: 350, w: 125 },
 ];
 
-function Pine({
-  x,
-  baseY,
-  h,
-  w,
-}: {
-  x: number;
-  baseY: number;
-  h: number;
-  w: number;
-}) {
+function Pine({ x, baseY, h, w }: { x: number; baseY: number; h: number; w: number }) {
   const tiers = 4;
   const points: string[] = [];
   for (let i = 0; i < tiers; i++) {
@@ -559,3 +521,5 @@ function ForestGrass() {
     </div>
   );
 }
+
+export default ForestScene;
