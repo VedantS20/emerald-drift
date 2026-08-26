@@ -142,3 +142,58 @@
     color: var(--color-foreground);
   }
 }
+
+/* ===== Misty Emerald Forest — nature scene tokens & motion ===== */
+:root {
+  --forest-sky-top: oklch(0.16 0.03 185);
+  --forest-sky-mid: oklch(0.22 0.05 165);
+  --forest-horizon: oklch(0.34 0.06 135);
+  --forest-mist: oklch(0.45 0.04 140);
+  --forest-canopy-deep: oklch(0.18 0.04 160);
+  --forest-canopy-mid: oklch(0.26 0.05 150);
+  --forest-canopy-near: oklch(0.16 0.035 155);
+  --forest-glow: oklch(0.82 0.14 110);
+  --forest-firefly: oklch(0.9 0.16 95);
+}
+
+@keyframes forest-sway {
+  0%, 100% { transform: rotate(-2.2deg); }
+  50% { transform: rotate(2.2deg); }
+}
+
+@keyframes forest-sway-soft {
+  0%, 100% { transform: rotate(-1.1deg) translateX(-1%); }
+  50% { transform: rotate(1.1deg) translateX(1%); }
+}
+
+@keyframes forest-drift {
+  0% { transform: translateX(-8%); }
+  100% { transform: translateX(8%); }
+}
+
+@keyframes forest-godray-shift {
+  0%, 100% { opacity: 0.5; transform: translateX(-3%) rotate(-1deg); }
+  50% { opacity: 0.85; transform: translateX(3%) rotate(1deg); }
+}
+
+@keyframes forest-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@keyframes forest-title-in {
+  0% { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes forest-fog {
+  0% { transform: translateX(-12%) scale(1.05); }
+  50% { transform: translateX(12%) scale(1.15); }
+  100% { transform: translateX(-12%) scale(1.05); }
+}
+
+@utility forest-glass {
+  backdrop-filter: blur(10px);
+  background: color-mix(in oklab, var(--forest-mist) 8%, transparent);
+  border: 1px solid color-mix(in oklab, var(--forest-glow) 18%, transparent);
+}
