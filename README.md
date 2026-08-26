@@ -22,3 +22,28 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+## Deploying to static hosting
+
+`npm run build:static` produces a plain static site in `dist/client` — no Node
+runtime, no server process. Upload its contents to your web root.
+
+```sh
+npm install   # or: bun install
+npm run build:static
+# upload everything in dist/client/ — including .htaccess — to public_html
+```
+
+The app shell is prerendered to `index.html` and the scene renders client-side,
+so the server needs a fallback rewrite for paths that aren't real files.
+`public/.htaccess` handles that on Apache. On nginx, use:
+
+```nginx
+location / {
+  try_files $uri $uri/ /index.html;
+}
+```
+
+`npm run build` is unchanged — it builds the SSR app via nitro (Cloudflare
+Worker by default), which is what Lovable's Publish uses. Set `NITRO_PRESET`
+to target another platform, e.g. `NITRO_PRESET=node-server npm run build`.
